@@ -3,14 +3,14 @@ import { NOOP } from '@vue/shared'
 import { mount } from '@vue/test-utils'
 import { ElButton } from '@element-plus/components'
 import {
-  elFormKey,
-  elFormItemKey,
+  formContextKey,
+  formItemContextKey,
   buttonGroupContextKey,
 } from '@element-plus/tokens'
 
 import type {
   ElFormContext,
-  ElFormItemContext,
+  FormItemContext,
   ButtonGroupContext,
 } from '@element-plus/tokens'
 
@@ -44,9 +44,9 @@ describe('use-form-item', () => {
     const propSize = 'small'
     const wrapper = mountComponent(
       () => {
-        provide(elFormItemKey, {
+        provide(formItemContextKey, {
           size: 'large',
-        } as ElFormItemContext)
+        } as FormItemContext)
       },
       {
         props: {
@@ -65,9 +65,9 @@ describe('use-form-item', () => {
         size: fallbackSize,
       } as ButtonGroupContext)
 
-      provide(elFormItemKey, {
+      provide(formItemContextKey, {
         size: 'large',
-      } as ElFormItemContext)
+      } as FormItemContext)
     })
 
     expect(wrapper.find(`.el-button--${fallbackSize}`).exists()).toBe(true)
@@ -76,11 +76,11 @@ describe('use-form-item', () => {
   it('should return formItem.size instead form.size', () => {
     const itemSize = 'small'
     const wrapper = mountComponent(() => {
-      provide(elFormItemKey, {
+      provide(formItemContextKey, {
         size: itemSize,
-      } as ElFormItemContext)
+      } as FormItemContext)
 
-      provide(elFormKey, {
+      provide(formContextKey, {
         size: 'large',
       } as ElFormContext)
     })
